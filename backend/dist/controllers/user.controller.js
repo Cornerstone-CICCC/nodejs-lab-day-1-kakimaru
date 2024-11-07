@@ -104,6 +104,16 @@ const loginUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 });
 // check auth
 const userProfile = (req, res) => {
+    const userId = req.signedCookies.userId;
+    if (userId) {
+        const user = user_model_1.default.findById(userId);
+        if (user) {
+            res.json(user);
+        }
+        else {
+            res.status(404).send({ message: "User not found." });
+        }
+    }
     res.status(200).send(`You are allowed to view the page.`);
 };
 // logout

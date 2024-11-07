@@ -111,6 +111,15 @@ const loginUser = async (req: Request<{}, {}, User>, res: Response) => {
 
 // check auth
 const userProfile = (req: Request, res: Response) => {
+  const userId = req.signedCookies.userId;
+  if(userId) {
+    const user = userModel.findById(userId)
+    if(user) {
+      res.json(user)
+    } else {
+      res.status(404).send({message: "User not found."})
+    }
+  }
   res.status(200).send(`You are allowed to view the page.`)
 }
 

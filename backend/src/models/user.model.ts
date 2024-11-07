@@ -1,19 +1,8 @@
 import { User, UserRequestBody } from "../types/user";
 import { v4 as uuidv4 } from "uuid";
-//     *Methods*
-//     - update(id)
-//     - delete(id)
 
 class UserModel {
-  private users: User[] = [
-    {
-      id: "asdas",
-      username: "John",
-      password: "asdasd",
-      firstname: "John",
-      lastname: "Smith",
-    },
-  ];
+  private users: User[] = [];
 
   findAll(): User[] {
     return this.users;

@@ -1,4 +1,4 @@
-import { Router } from "express";
+import { Router, Request, Response } from "express";
 import userController from "../controllers/user.controller";
 import { cookieAuthCheck } from "../middleware/auth";
 
@@ -12,6 +12,6 @@ userRouter.put('/user/:id', userController.updateUserById)
 userRouter.delete('/user/:id', userController.deleteUserById)
 userRouter.post('/login', userController.loginUser)
 userRouter.get('/check-auth', cookieAuthCheck,userController.userProfile)
-userRouter.get('/logout', userController.logoutUser)
+userRouter.post('/logout', userController.logoutUser)
 
 export default userRouter;

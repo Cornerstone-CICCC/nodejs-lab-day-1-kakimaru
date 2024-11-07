@@ -1,20 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const uuid_1 = require("uuid");
-//     *Methods*
-//     - update(id)
-//     - delete(id)
 class UserModel {
     constructor() {
-        this.users = [
-            {
-                id: "asdas",
-                username: "John",
-                password: "asdasd",
-                firstname: "John",
-                lastname: "Smith",
-            },
-        ];
+        this.users = [];
     }
     findAll() {
         return this.users;
