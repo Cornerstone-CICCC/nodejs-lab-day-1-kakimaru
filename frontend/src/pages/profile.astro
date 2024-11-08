@@ -1,0 +1,60 @@
+---
+
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<title>Profile</title>
+	</head>
+	<body>
+		<h1 class="title">Loading...</h1>
+    <h2>Username</h2>
+    <p class="username"></p>
+    <h2>First name</h2>
+    <p class="firstname"></p>
+    <h2>Last name</h2>
+    <p class="lastname"></p>
+    <button class="logout">Log out</button>
+	</body>
+</html>
+
+<script>
+  const title = document.querySelector('.title')! as HTMLHeadElement;
+  const username = document.querySelector('.username')! as HTMLParagraphElement;
+  const firstname = document.querySelector('.firstname')! as HTMLParagraphElement;
+  const lastname = document.querySelector('.lastname')! as HTMLParagraphElement;
+  const logout = document.querySelector('.logout')! as HTMLButtonElement;
+
+  const checkAuth = async () => {
+    const res = await fetch(`http://localhost:3000/check-auth`, {
+      credentials: "include"
+    })
+    if(res.ok) {
+      title.textContent = `Welcome to your profile`
+      const user = await res.json()
+      username.textContent = user.username;
+      firstname.textContent = user.firstname;
+      lastname.textContent = user.lastname;
+    }
+    if(!res.ok) {
+      window.location.href = '/login'
+    }
+  }
+  checkAuth()
+
+  logout.addEventListener('click', async (e) => {
+    e.preventDefault()
+    const res = await fetch(`http://localhost:3000/logout`, {
+      method: "POST",
+      credentials: "include"
+    })
+    if(res.ok) {
+      window.location.href = '/'
+    }
+  })
+
+</script>
